@@ -598,18 +598,61 @@ footer hr{
   opacity: 1;
 }
 
-.contact-points ul{
-  list-style-type: none; 
-  padding: 0;             
-  margin: 0;
-  color: black;    
-  font-size: 1.5rem;
-  line-height: 30px;
-  font-weight: 500;
-  padding-bottom: 1.5rem;
-
-
-}
+/* ========================================
+   FOOTER LAYOUT & SOCIAL MEDIA ALIGNMENT
+   ======================================== */
+   .contact-points {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Aligns social icons perfectly vertical with text lines */
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 3rem 0 1.5rem 0;
+  }
+  
+  .contact-points ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .contact-points li {
+    color: var(--coffee-bean);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .social-wrapper {
+    display: flex;
+    gap: 1.25rem; /* Neatly spaces buttons away from each other */
+    align-items: center;
+  }
+  
+  .social-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: var(--blood-red);
+    border: 3px solid black;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 0px black;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    text-decoration: none;
+  }
+  
+  .social-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0px 0px 0px black;
+  }
+  
+  .social-btn:hover {
+    background-color: var(--mahogany-red);
+  }
+  
 
 .link-wrapper ul{
   display: flex;          
@@ -659,13 +702,16 @@ RESPONSIVENESS
 ======================================== */
 
 @media (max-width: 1008px) {
+  .hero-cta{
+    margin-top: 7rem;
+  }
   .brand {
     font-weight: bold;
     padding: 0 1.5rem;
   }
 
   .navbar a{
-    font-size: .9rem;
+    font-size: 0.9rem;
     padding: 0;
   }
 
@@ -702,3 +748,16 @@ RESPONSIVENESS
     font-size: 2rem;
   }
 }
+
+  /* Responsive alignment footer */
+  @media (max-width: 768px) {
+    .contact-points {
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+    }
+    .social-wrapper {
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+  }
