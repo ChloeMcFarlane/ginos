@@ -307,33 +307,33 @@ HERO
 }
 
 #hero {
-  padding-top: 25vh;
-  align-items: stretch;
+  padding-top: 22vh;
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  align-items: stretch; /* Forces both sides to stretch equally in height */
 }
 
-/* Image = 60%, copy box = 40%, always, in row mode */
 #hero img {
-  flex: 1 1 60%;
-  max-width: 60%;
   width: 100%;
-  height: 100%;
   object-fit: cover;
   border-radius: 25px;
   border: 5px solid var(--blood-red);
 }
 
 .hero-cta {
-  flex: 1 1 40%;
+  flex: 0 0 40%;
   max-width: 40%;
-  border: 2px solid var(--blood-red);
+  min-width: 360px; /* Protects the text layout from over-compressing on medium displays */
+  border: 5px solid var(--coffee-bean);
   background-color: var(--blood-red);
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   border-radius: 25px;
   color: var(--mint-cream);
-  font-weight: 200;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 8px 8px 0px var(--coffee-bean);
 }
 
   .hero-cta header{
@@ -366,7 +366,7 @@ HERO
   gap: 1rem;
   text-align: center;
   justify-content: center;
-  max-width: 100%;
+  width: 70%;
   margin: 2vh auto;
 
 }
@@ -410,9 +410,29 @@ HERO
   .button-link:active{
     transform: translateY(6px);
     box-shadow: 0px 0px 0px black;
-
   }
 
+  /* ========================================
+   RESPONSIVE BREAK FOR HERO GRID
+   ======================================== */
+@media (max-width: 1150px) {
+  #hero {
+    flex-direction: column;
+    padding-top: 15vh;
+    gap: 2rem;
+  }
+  #hero img, .hero-cta {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    min-width: unset;
+  }
+  #hero img {
+    height: 350px;
+    aspect-ratio: 16 / 9;
+    order: -1;
+  }
+}
 /* ========================================
 CATERING
 ======================================== */
@@ -638,7 +658,7 @@ footer hr{
 RESPONSIVENESS
 ======================================== */
 
-@media (max-width: 968px) {
+@media (max-width: 1008px) {
   .brand {
     font-weight: bold;
     padding: 0 1.5rem;
