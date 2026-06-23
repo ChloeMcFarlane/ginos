@@ -245,9 +245,11 @@
 
 .mobile-nav a {
   text-decoration: none;
-  color: var(--forest-moss);
+  color: var(--coffee-bean);
   font-size: 1.4rem;
   font-weight: 600;
+  padding-left: 1rem;
+  padding-right: 1.5rem;
 }
 
 .mobile-nav .button-link {
