@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <title>Gino's Cucina</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Bootstrap CSS v5.3.8 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="css/style-index.css">
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar">
+                <button class="hamburger" id="hamburger" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            
+                <ul class="nav-links left-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Gallery</a></li>
+                </ul>
+            
+                <div class="brand">
+                    <a href="#home">
+                        <img src="ginos-ASSETS/logo-v3.svg" alt="logo" height="150" width="150">
+                    </a>
+                </div>
+            
+                <ul class="nav-links right-links">
+                    <li><a href="#">Directions</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="https://ginoscucinabrickovenpizza.orders2me.com/order-now">Order Online</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+            <div class="mobile-nav" id="mobile-nav">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Directions</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="https://ginoscucinabrickovenpizza.orders2me.com/order-now" class="button-link">Order Online <span class="arrow">&rarr;</span></a></li>
+                </ul>
+            </div>
+        </header>
+        <main>
+            <div id="hero" class="container">
+                <div class="hero-cta">
+                    <!-- CALL TO ACTION -->
+                    <section>
+                        <header>START YOUR ORDER</header>
+                        <div class="copy-container">5% off Gino's EVERYTIME you order online through our website!</div>
+                        <div class="btns">
+                            <!-- ORDER BUTTONS  -->
+                            <a href="https://example.com" class="button-link">Takeout Menu</a>
+                            <a href="https://ginoscucinabrickovenpizza.orders2me.com/order-now" class="button-link">Order Online <span class="arrow">&rarr;</span></a>
+                        </div>
+                    </section>
+                </div>
+                <div class="hero-img-wrap">
+                    <img src="ginos-ASSETS/pexels-pizzaimg1.jpg" alt="Image of pizza">
+                </div>
+            </div>
+
+            <div id="catering" class="container">
+                <header>
+                    <h1>Catering.</h1>
+                    <div class="catering-subwords">
+                        <h2 class="reveal-word"><em>For</em></h2>
+                        <h2 class="reveal-word"><em>All</em></h2>
+                        <h2 class="reveal-word"><em>Occasions</em></h2>
+                    </div>
+                </header>
+                <div class="catering-copy">
+                    <p>Gino's Cucina & Brick Oven Pizza is dedicated to providing a <em>personalized</em> approach to each of our hosted events. Let our event planners assist you in planning a party that your friends and family will <em>never forget</em>. Please call or stop by and talk to one of our store managers.</p>
+                </div>
+            </div>
+            <div id="image-grid" class="container">
+                <div class="image-grid">
+                    <div class="grid-item"><img src="ginos-ASSETS/pic-gallery-2.jpg" alt="Description 1"></div>
+                    <div class="grid-item"><img src="ginos-ASSETS/rome-pasta-img.jpg" alt="Description 2"></div>
+                    <div class="grid-item"><img src="ginos-ASSETS/pexels-pizzaimg3.jpg" alt="Description 3"></div>
+                    <div class="grid-item"><img src="ginos-ASSETS/Pasta-Party.jpg" alt="Description 4"></div>
+                  </div>
+            </div>
+            <div id="map-section" class="container">
+                <!-- map -->
+                <div class="map-wrapper">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <!-- place footer here -->
+             <header><h1>Gino's Cucina</h1></header>
+             <hr style="height: 5px; border: none; background-color: black;">
+             <div class="contact-points">
+                <ul>
+                    <li>718.857.7100</li>
+                    <li>info@ginoscucina.com</li>
+                </ul>
+
+             </div>
+
+
+             <div class="link-wrapper">
+                <ul>
+                    <li>Contact</li>
+                    <li>Menu</li>
+                    <li>Order Online</li>
+                    <li>Gallery</li>
+                    <li>Directions</li>
+                </ul>
+             </div>
+             <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+                &uarr;
+            </button>
+
+        </footer>
+        <!-- Bootstrap JavaScript Bundle (includes Popper) -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"
+        ></script>
+        <!-- IMPORTANT: replace YOUR_REAL_API_KEY below with an actual Google Maps API key
+             (Google Cloud Console -> enable "Maps JavaScript API" + "Geocoding API" -> Credentials -> create key).
+             The map will NOT work until this is a real key. -->
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=YOUR_REAL_API_KEY&callback=initMap&libraries=marker&v=beta"
+            async defer
+        ></script>
+        <script src="js/index.js"></script>
+    </body>
+</html>
