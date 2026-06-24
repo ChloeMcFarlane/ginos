@@ -1,5 +1,5 @@
 export const handler = async (event, context) => {
-  const targetUrl = `https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/gviz/tq?tqx=out:json`;
+  const targetUrl = `https://docs.google.com/spreadsheets/d/166XtSMebhq4G5EVnlFOA9MVjt_nthjqEkRtBl52PVDg/gviz/tq?tqx=out:json`;
 
   try {
     const rawRes = await fetch(targetUrl);
