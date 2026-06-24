@@ -1,7 +1,7 @@
 async function fetchPizzeriaMenu() {
     try {
       // Hits your clean local serverless function endpoint!
-      const response = await fetch('/api/get-menu');
+      const response = await fetch('/.netlify/functions/get-menu');
       const menuItems = await response.json();
       
       console.log("Clean API Data:", menuItems);
