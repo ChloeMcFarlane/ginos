@@ -1,0 +1,212 @@
+/* ─────────────────────────────────────────────
+     FONT FACES
+  ───────────────────────────────────────────── */
+  
+  @font-face {
+    font-family: 'Work Sans';
+    src: url('/ginos-ASSETS/WorkSans-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Work Sans';
+    src: url('/ginos-ASSETS/WorkSans-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Bungee Tint';
+    src: url('/ginos-ASSETS/BungeeTint-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Oi';
+    src: url('/ginos-ASSETS/Oi-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Climate Crisis';
+    src: url('/ginos-ASSETS/ClimateCrisis-Regular-VariableFont_YEAR.ttf') format('truetype');
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  /* ─────────────────────────────────────────────
+     DESIGN TOKENS
+  ───────────────────────────────────────────── */
+  :root {
+    /* CSS HEX */
+    --blood-red: #920F0Dff;
+    --mahogany-red: #BB1E1Aff;
+    --forest-moss: #4d694e;
+    --dark-emerald: #006745ff;
+    --mint-cream: #E7EEE7ff;
+    --dough: #fff3d5;
+    --cartoon-yellow: rgb(235, 221, 64);
+    --coffee-bean: #0E0306ff;
+
+  
+    --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* ─────────────────────────────────────────────
+     RESET
+  ───────────────────────────────────────────── */
+  *, *::before, *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  html { scroll-behavior: smooth; }
+  
+  body {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    overflow-x: hidden;
+    background-color: var(--dough);
+  }
+
+  .container{
+    padding: 0 16px;
+    margin: auto;
+  }
+
+  /* ========================================
+   KEYFRAMES
+   ======================================== */
+   @keyframes fadeInUp {from { opacity: 0; transform: translate(-50%, -50%) translateY(32px); } to   { opacity: 1; transform: translate(-50%, -50%) translateY(0); }}
+   @keyframes slideUpSlow { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: translateY(0); } }
+   @keyframes stagger     { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+   @keyframes spin        { to   { transform: translate(-50%, -50%) rotate(360deg); } }
+   
+   /* ========================================
+      SCROLL REVEAL
+      ======================================== */
+   .scroll-reveal { opacity: 0; transition: opacity 0.7s ease, transform 0.7s ease; }
+   .scroll-reveal.scroll-reveal-up    { transform: translateY(36px); }
+   .scroll-reveal.scroll-reveal-left  { transform: translateX(-44px); }
+   .scroll-reveal.scroll-reveal-right { transform: translateX(44px); }
+   .scroll-reveal.revealed            { opacity: 1; transform: translate(0, 0); }
+
+/* ─────────────────────────────────────────────
+   MENU PAGE — FILTER BAR + MENU ITEM LISTING
+───────────────────────────────────────────── */
+
+#menu-hero {
+    position: relative;
+    display: block;
+    padding-top: 6rem;
+  }
+  
+  #menu-hero img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 25px;
+    border: 5px solid var(--blood-red);
+    display: block;
+  }
+  
+  /* Filter row sits at the "tip" of the page, just barely overlapping
+     the top edge of the hero image — minimal overlay, per spec */
+  .filter-wrapper {
+    position: absolute;
+    top: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    width: 100%;
+    z-index: 5;
+    flex-wrap: wrap;
+  }
+  
+  .filter-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: 'Work sans', Arial, Helvetica, sans-serif;
+    font-size: 1.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--blood-red);
+    transition: color var(--transition-base);
+  }
+  
+  .filter-btn:hover {
+    color: var(--mahogany-red);
+  }
+  
+  /* Active filter gets struck through so the user always knows
+     which category they're currently viewing */
+  .filter-btn.active {
+    color: var(--coffee-bean);
+    text-decoration: line-through;
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--coffee-bean);
+  }
+  
+  .menu-category-title {
+    text-align: center;
+    font-family: 'Oi', Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    color: var(--blood-red);
+    margin: 3rem 0 2rem;
+  }
+  
+  .menu-items-list {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+  
+  .menu-item {
+    margin-bottom: 2rem;
+  }
+  
+  .menu-item-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  
+  .menu-item-name {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    color: var(--coffee-bean);
+    white-space: nowrap;
+  }
+  
+  /* The dotted leader line between name and price */
+  .menu-item-dots {
+    flex: 1 1 auto;
+    border-bottom: 3px dotted var(--coffee-bean);
+    height: 1em;
+    margin: 0 0.25rem;
+    min-width: 1rem;
+  }
+  
+  .menu-item-price {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 2rem;
+    color: var(--dark-emerald);
+    white-space: nowrap;
+  }
+  
+  .menu-item-description {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.75rem;
+    color: var(--coffee-bean);
+    margin-top: 0.25rem;
+  }
