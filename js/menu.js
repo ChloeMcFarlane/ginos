@@ -1,60 +1,90 @@
+/* ─────────────────────────────────────────────
+   MENU PAGE LOGIC
+   - Pulls items from the Netlify function (which reads your Google Sheet)
+   - Builds the filter row automatically from whatever is in the
+     "category" column, so adding a new category in the sheet is
+     all you need to do — no HTML/JS edits required.
+   - Clicking a filter shows that category's items and strikes
+     through the active filter so the user knows where they are.
+───────────────────────────────────────────── */
+
+let allItems = [];
+let activeCategory = null;
+
 async function fetchPizzeriaMenu() {
-    try {
-      // Hits your clean local serverless function endpoint!
-      const response = await fetch('/.netlify/functions/get-menu');
-      const menuItems = await response.json();
-      
-      console.log("Clean API Data:", menuItems);
-  
-      // 1. Filter out items the client marked as "Hidden"
-      const activeItems = menuItems.filter(item => item.status?.toLowerCase() !== 'hidden');
-  
-      // 2. Group the remaining items by their Category column
-      const menuByCategory = activeItems.reduce((acc, item) => {
-        const cat = item.category || 'Other';
-        if (!acc[cat]) acc[cat] = [];
-        acc[cat].push(item);
-        return acc;
-      }, {});
-      
-      // 3. Send grouped data straight to your renderer!
-      displayMenu(menuByCategory);
-  
-    } catch (err) {
-      console.error("Error loading menu:", err);
-      // Fallback message for the user if the backend micro-api fails
-      document.querySelector('main').innerHTML = `<p class="container text-center my-5">Menu temporarily unavailable. Please call us to order!</p>`;
+  try {
+    const response = await fetch('/.netlify/functions/get-menu');
+    const menuItems = await response.json();
+
+    // Filter out anything marked "Hidden" in the sheet
+    allItems = menuItems.filter(item => item.status?.toLowerCase() !== 'hidden');
+
+    if (allItems.length === 0) {
+      document.querySelector('main').innerHTML =
+        `<p class="container text-center my-5">Menu temporarily unavailable. Please call us to order!</p>`;
+      return;
     }
+
+    buildFilters(allItems);
+
+  } catch (err) {
+    console.error("Error loading menu:", err);
+    document.querySelector('main').innerHTML =
+      `<p class="container text-center my-5">Menu temporarily unavailable. Please call us to order!</p>`;
   }
-  
-  function displayMenu(categories) {
-    const mainElement = document.querySelector('main');
-    mainElement.innerHTML = ''; // Clear out any loading placeholders
-  
-    for (const [categoryName, items] of Object.entries(categories)) {
-      // Generate a clean structure that matches your cartoon/pop aesthetic
-      const section = document.createElement('section');
-      section.className = 'container my-5';
-      
-      section.innerHTML = `
-        <h2 class="text-capitalize mb-4" style="font-family: 'Oi', sans-serif; color: var(--blood-red);">${categoryName}</h2>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-          ${items.map(item => `
-            <div class="col">
-              <div class="p-3" style="border: 3px solid var(--coffee-bean); background-color: white; border-radius: 15px; box-shadow: 4px 4px 0px var(--coffee-bean);">
-                <div class="d-flex justify-content-between align-items-baseline mb-2">
-                  <h4 class="mb-0" style="font-weight: 700; color: var(--coffee-bean);">${item.name}</h4>
-                  <span class="fs-5" style="font-weight: 700; color: var(--dark-emerald);">$${parseFloat(item.price).toFixed(2)}</span>
-                </div>
-                <p class="text-muted mb-0" style="font-family: 'Work Sans', sans-serif;">${item.description || ''}</p>
-              </div>
-            </div>
-          `).join('')}
+}
+
+function buildFilters(items) {
+  const wrapper = document.getElementById('filter-wrapper');
+
+  // Preserve first-seen order from the sheet rather than sorting alphabetically
+  const categories = [...new Set(items.map(item => item.category || 'Other'))];
+
+  wrapper.innerHTML = categories
+    .map(cat => `<button type="button" class="filter-btn" data-category="${cat}">${cat}</button>`)
+    .join('');
+
+  wrapper.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => selectCategory(btn.dataset.category));
+  });
+
+  // Show the first category by default
+  selectCategory(categories[0]);
+}
+
+function selectCategory(category) {
+  activeCategory = category;
+
+  // Strike through the active filter, clear the others
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.category === category);
+  });
+
+  renderItems(category);
+}
+
+function renderItems(category) {
+  const titleEl = document.getElementById('menu-category-title');
+  const itemsEl = document.getElementById('menu-items');
+
+  titleEl.textContent = category;
+
+  const items = allItems.filter(item => (item.category || 'Other') === category);
+
+  itemsEl.innerHTML = `
+    <div class="menu-items-list">
+      ${items.map(item => `
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">${item.name}</span>
+            <span class="menu-item-dots" aria-hidden="true"></span>
+            <span class="menu-item-price">$${parseFloat(item.price).toFixed(2)}</span>
+          </div>
+          ${item.description ? `<p class="menu-item-description">${item.description}</p>` : ''}
         </div>
-      `;
-      mainElement.appendChild(section);
-    }
-  }
-  
-  // Fixed: Fire the correct function when the menu page loads!
-  document.addEventListener('DOMContentLoaded', fetchPizzeriaMenu);
+      `).join('')}
+    </div>
+  `;
+}
+
+document.addEventListener('DOMContentLoaded', fetchPizzeriaMenu);

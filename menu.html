@@ -57,14 +57,17 @@
             </div>
         </header>
         <main>
-            <div class="container" id="hero">
-                <div class="filter-wrapper">
-                    <a href="#">Pizza</a>
-                    <a href="#">Pasta</a>
-                    <a href="#">Chicken</a>
+            <div class="container" id="menu-hero">
+                <div class="filter-wrapper" id="filter-wrapper" aria-label="Filter menu by category">
+                    <!-- Filter buttons are generated automatically from your spreadsheet's
+                         "category" column — see js/menu.js. No need to hand-edit these. -->
                 </div>
                 <img src="ginos-ASSETS/ -127.jpg" alt="Pizza menu img">
             </div>
+
+            <h2 class="menu-category-title" id="menu-category-title"></h2>
+
+            <div id="menu-items"></div>
         </main>
         <footer>
             <!-- place footer here -->
