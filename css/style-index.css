@@ -92,9 +92,9 @@
    .scroll-reveal.scroll-reveal-right { transform: translateX(44px); }
    .scroll-reveal.revealed            { opacity: 1; transform: translate(0, 0); }
 
-      /* ========================================
-      NAV BAR
-      ======================================== */
+  /* ========================================
+  NAV BAR
+  ======================================== */
 
       /* Make the navbar sticky at the top of the page */
 .navbar {
@@ -110,7 +110,7 @@
     border-bottom: 2px solid var(--forest-moss);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     z-index: 1000;
-    gap: clamp(0.5rem, 2vw, 2rem);
+    gap: clamp(1rem, 3vw, 3rem);
     transition: padding var(--transition-base), background-color var(--transition-base);
 
   }
@@ -120,10 +120,10 @@
     display: flex;
     list-style: none;
     flex-wrap: nowrap;
-    gap: clamp(0.75rem, 2vw, 1.5rem);
+    gap: clamp(1rem, 3vw, 2.25rem);
     margin: 0;
     padding: 0;
-    font-size: clamp(0.8rem, 1.1vw, 1.1rem);
+    font-size: clamp(1rem, 1.3vw, 1.5rem);
     white-space: nowrap;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
   }
@@ -132,7 +132,7 @@
   .left-links, .right-links {
     flex: 1 1 0;
     min-width: 0;
-    gap: clamp(0.75rem, 2.5vw, 2.5rem);
+    gap: clamp(3.75rem, 3.5vw, 3.5rem);
   }
   
   /* Center-align the right links to balance the left links */
