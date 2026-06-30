@@ -62,3 +62,29 @@ window.addEventListener('scroll', () => {
 backToTopBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// ── OPEN / CLOSED BADGE ──────────────────────────────────────────
+// Hours: Monday–Saturday, 11:00 am – 11:00 pm (NYC local time)
+function updateHoursStatus() {
+  const badge = document.getElementById('hours-status-badge');
+  if (!badge) return;
+
+  // Use New York time regardless of the visitor's timezone
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+  const day  = now.getDay();   // 0 = Sun, 1 = Mon … 6 = Sat
+  const hour = now.getHours();
+  const min  = now.getMinutes();
+
+  const isWeekday  = day >= 1 && day <= 6;          // Mon–Sat
+  const afterOpen  = hour > 11 || (hour === 11 && min >= 0);
+  const beforeClose = hour < 23;                     // before 11 pm
+
+  const isOpen = isWeekday && afterOpen && beforeClose;
+
+  badge.className = `status-badge ${isOpen ? 'open' : 'closed'}`;
+  badge.innerHTML = `<span class="status-dot"></span>${isOpen ? 'Open Now' : 'Closed'}`;
+}
+
+updateHoursStatus();
+// Refresh every minute so it flips automatically at open/close time
+setInterval(updateHoursStatus, 60_000);

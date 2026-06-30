@@ -103,13 +103,14 @@
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 0.75rem clamp(1rem, 3vw, 2rem);
     background-color: var(--dough);
     border-bottom: 2px solid var(--forest-moss);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     z-index: 1000;
+    gap: clamp(0.5rem, 2vw, 2rem);
     transition: padding var(--transition-base), background-color var(--transition-base);
 
   }
@@ -118,17 +119,20 @@
   .nav-links {
     display: flex;
     list-style: none;
-    gap: 1.5rem;
+    flex-wrap: nowrap;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
     margin: 0;
     padding: 0;
-    font-size: 1.2rem;
+    font-size: clamp(0.8rem, 1.1vw, 1.1rem);
+    white-space: nowrap;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
   }
   
   /* Make the left and right containers take up equal space so the middle is centered */
   .left-links, .right-links {
-    flex: 1;
-    gap: 3rem;
+    flex: 1 1 0;
+    min-width: 0;
+    gap: clamp(0.75rem, 2.5vw, 2.5rem);
   }
   
   /* Center-align the right links to balance the left links */
@@ -147,11 +151,15 @@
   
   /* Brand styling */
   .brand {
+    flex: 0 0 auto;
     font-weight: bold;
-    padding: 0 6.5rem;
+    padding: 0 clamp(1rem, 4vw, 4rem);
+    line-height: 0;
   }
 
   .navbar .brand img {
+    height: clamp(60px, 9vw, 110px);
+    width: clamp(60px, 9vw, 110px);
     transition: height var(--transition-base), width var(--transition-base);
   }
   
@@ -166,16 +174,16 @@
   /* Additional scrolled function */
 
   .navbar.scrolled {
-    padding: 0.5rem 2rem;
+    padding: 0.4rem clamp(1rem, 3vw, 2rem);
   }
   
   .navbar.scrolled .brand img {
-    height: 80px;
-    width: 80px;
+    height: clamp(48px, 6vw, 70px);
+    width: clamp(48px, 6vw, 70px);
   }
   
   .navbar.scrolled .nav-links a {
-    font-size: 0.85rem;
+    font-size: clamp(0.7rem, 0.9vw, 0.85rem);
   }
 
   /* Hamburger button — hidden on desktop */
@@ -274,8 +282,9 @@
   visibility: visible;
 }
 
-/* Breakpoint */
-@media (max-width: 900px) {
+/* Breakpoint — covers iPad portrait/landscape and phones so the
+   full nav links never get squeezed into overlapping/wrapping text */
+@media (max-width: 1100px) {
   .hamburger {
     display: block;
   }
@@ -292,6 +301,29 @@
 
   .navbar {
     justify-content: space-between;
+  }
+
+  .navbar .brand img,
+  .navbar.scrolled .brand img {
+    height: 70px;
+    width: 70px;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar .brand img,
+  .navbar.scrolled .brand img {
+    height: 56px;
+    width: 56px;
+  }
+
+  .mobile-nav {
+    width: 85vw;
+    padding: 6rem 1.5rem 2rem;
+  }
+
+  .mobile-nav a {
+    font-size: 1.2rem;
   }
 }
 
@@ -340,7 +372,7 @@ HERO
 
   .hero-cta header{
     padding-top: 2rem;
-    font-size: 3rem;
+    font-size: clamp(1.7rem, 4vw, 3rem);
     text-align: center;
     font-family: 'Oi', Arial, Helvetica, sans-serif;
     color: var(--mint-cream);
@@ -358,7 +390,7 @@ HERO
 .copy-container{
   color: var(--mint-cream);
   text-align:center;
-  font-size: 1.6rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
   font-style: italic;
 }
 
@@ -384,7 +416,7 @@ HERO
   gap: 8px; /* Creates clean space between text and arrow */
   font-family: sans-serif;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   transition: background-color 0.2s ease;
   position: relative;
@@ -451,7 +483,7 @@ CATERING
 }
 
 #catering h1{
-  font-size:5rem;
+  font-size: clamp(2.4rem, 8vw, 5rem);
 }
 
 .catering-subwords {
@@ -478,7 +510,7 @@ CATERING
 .reveal-word:nth-child(3).revealed { transition-delay: 0.3s; }
 
 .catering-copy{
-  font-size: 1.5rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
   text-align: center;
   word-spacing: 20%;
 }
@@ -576,99 +608,198 @@ IMG GRID
   }
 
 /* ========================================
-FOOTER
-======================================== */
+   FOOTER
+   ======================================== */
 
-footer{
+footer {
   background-color: var(--cartoon-yellow);
   border: 5px solid var(--coffee-bean);
   border-radius: 25px;
-  margin:10px;
+  margin: 10px;
   margin-bottom: 10px;
-  padding:2rem;
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
 }
 
-footer header h1{
-  font-size: 4rem;
+/* ── Brand ── */
+footer header h2 {
+  font-size: clamp(2rem, 7vw, 4rem);
   font-family: 'Oi', Arial, Helvetica, sans-serif;
-  color: var(--dough);
+  color: var(--coffee-bean);
+  line-height: 1;
+}
+
+footer hr {
+  width: 100%;
+  height: 4px;
+  background-color: var(--coffee-bean);
+  border: none;
+  border-radius: 2px;
+  opacity: 1;
+  margin: 0;
+}
+
+/* ── Section label ── */
+.footer-title {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--coffee-bean);
+  opacity: 0.5;
+  margin-bottom: 0.4rem;
+  text-decoration: none;
+}
+
+/* ── Contact ── */
+.contact-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.contact-points ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.contact-points li {
+  color: var(--coffee-bean);
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* ── Hours ── */
+.hours-status {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.hours-label {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
   color: var(--coffee-bean);
 }
 
-footer hr{
-  background-color: black;
-  opacity: 1;
+/* Open/Closed badge — injected by JS onto #hours-status-badge */
+#hours-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-/* ========================================
-   FOOTER LAYOUT & SOCIAL MEDIA ALIGNMENT
-   ======================================== */
-   .contact-points {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Aligns social icons perfectly vertical with text lines */
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    padding: 3rem 0 1.5rem 0;
-  }
-  
-  .contact-points ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .contact-points li {
-    color: var(--coffee-bean);
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
-  }
-  
-  .social-wrapper {
-    display: flex;
-    gap: 1.25rem; /* Neatly spaces buttons away from each other */
-    align-items: center;
-  }
-  
-  .social-btn {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background-color: var(--blood-red);
-    border: 3px solid black;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 4px 0px black;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-    text-decoration: none;
-  }
-  
-  .social-btn:active {
-    transform: translateY(4px);
-    box-shadow: 0px 0px 0px black;
-  }
-  
-  .social-btn:hover {
-    background-color: var(--mahogany-red);
-  }
-  
+#hours-status-badge.open {
+  background-color: #d4f1dd;
+  color: #1a6632;
+  border: 2px solid #1a6632;
+}
 
-.link-wrapper ul{
-  display: flex;          
-  list-style-type: none; 
-  padding: 0;             
+#hours-status-badge.closed {
+  background-color: #fde8e8;
+  color: #8b1a1a;
+  border: 2px solid #8b1a1a;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+#hours-status-badge.open .status-dot {
+  background-color: #22a24a;
+  animation: pulse-green 2s infinite;
+}
+
+#hours-status-badge.closed .status-dot {
+  background-color: #c0392b;
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(34,162,74,0.25); }
+  50%       { box-shadow: 0 0 0 6px rgba(34,162,74,0.1); }
+}
+
+/* ── Social ── */
+.social-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.social-wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.social-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: var(--blood-red);
+  border: 3px solid black;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 0px black;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  text-decoration: none;
+}
+
+.social-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0px 0px 0px black;
+}
+
+.social-btn:hover {
+  background-color: var(--mahogany-red);
+}
+
+/* ── Nav links ── */
+.link-wrapper ul {
+  list-style: none;
+  padding: 0;
   margin: 0;
-  color: black;    
-  gap: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
-.link-wrapper li {
-  cursor: pointer;
+.link-wrapper ul li a {
+  text-decoration: none;
+  color: var(--coffee-bean);
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: opacity 0.2s ease;
 }
 
+.link-wrapper ul li a:hover {
+  opacity: 0.55;
+}
+
+/* ── Back to top ── */
 .back-to-top {
   position: fixed;
   bottom: 2rem;
@@ -690,13 +821,28 @@ footer hr{
   z-index: 999;
 }
 
-.back-to-top.show {
-  display: flex;
-}
+.back-to-top.show { display: flex; }
 
 .back-to-top:active {
   transform: translateY(6px);
   box-shadow: 0px 0px 0px black;
+}
+
+/* ── Mobile: center everything ── */
+@media (max-width: 768px) {
+  footer {
+    align-items: center;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  footer header h1 { text-align: center; }
+  .contact-points   { align-items: center; }
+  .contact-points ul { align-items: center; }
+  .hours-status     { justify-content: center; }
+  .social-points    { align-items: center; }
+  .social-wrapper   { justify-content: center; }
+  .link-wrapper ul  { justify-content: center; }
 }
 
 /* ========================================
@@ -706,19 +852,6 @@ RESPONSIVENESS
 @media (max-width: 1008px) {
   .hero-cta{
     margin-top: 7rem;
-  }
-  .brand {
-    font-weight: bold;
-    padding: 0 1.5rem;
-  }
-
-  .navbar a{
-    font-size: 0.9rem;
-    padding: 0;
-  }
-
-  .navbar .brand img {
-    transition: height var(--transition-base), width var(--transition-base);
   }
 
   #hero {
@@ -751,135 +884,23 @@ RESPONSIVENESS
   }
 }
 
-  /* Responsive alignment footer */
-  @media (max-width: 768px) {
-    .contact-points {
-      flex-direction: column;
-      text-align: center;
-      justify-content: center;
-    }
-    .social-wrapper {
-      justify-content: center;
-      margin-top: 0.5rem;
-    }
+  /* Footer mobile alignment handled in footer section above */
+
+@media (max-width: 700px) {
+  .image-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-/* ─────────────────────────────────────────────
-   MENU PAGE — FILTER BAR + MENU ITEM LISTING
-───────────────────────────────────────────── */
-
-#menu-hero {
-  position: relative;
-  display: block;
-  padding-top: 6rem;
-}
-
-#menu-hero img {
-  width: 100%;
-  object-fit: cover;
-  border-radius: 25px;
-  border: 5px solid var(--blood-red);
-  display: block;
-}
-
-/* Filter row sits at the "tip" of the page, just barely overlapping
-   the top edge of the hero image — minimal overlay, per spec */
-.filter-wrapper {
-  position: absolute;
-  top: -1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2.5rem;
-  width: 100%;
-  z-index: 5;
-  flex-wrap: wrap;
-}
-
-.filter-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  font-family: 'Oi', Arial, Helvetica, sans-serif;
-  font-size: 1.75rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--blood-red);
-  transition: color var(--transition-base);
-}
-
-.filter-btn:hover {
-  color: var(--mahogany-red);
-}
-
-/* Active filter gets struck through so the user always knows
-   which category they're currently viewing */
-.filter-btn.active {
-  color: var(--coffee-bean);
-  text-decoration: line-through;
-  text-decoration-thickness: 3px;
-  text-decoration-color: var(--coffee-bean);
-}
-
-.menu-category-title {
-  text-align: center;
-  font-family: 'Oi', Arial, Helvetica, sans-serif;
-  text-transform: uppercase;
-  color: var(--blood-red);
-  margin: 3rem 0 2rem;
-}
-
-.menu-items-list {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 2rem 4rem;
-}
-
-.menu-item {
-  margin-bottom: 2rem;
-}
-
-.menu-item-row {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-}
-
-.menu-item-name {
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 600;
-  font-size: 2.5rem;
-  text-transform: uppercase;
-  color: var(--coffee-bean);
-  white-space: nowrap;
-}
-
-/* The dotted leader line between name and price */
-.menu-item-dots {
-  flex: 1 1 auto;
-  border-bottom: 3px dotted var(--coffee-bean);
-  height: 1em;
-  margin: 0 0.25rem;
-  min-width: 1rem;
-}
-
-.menu-item-price {
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 400;
-  font-size: 2rem;
-  color: var(--dark-emerald);
-  white-space: nowrap;
-}
-
-.menu-item-description {
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 400;
-  font-style: italic;
-  font-size: 0.75rem;
-  color: var(--coffee-bean);
-  margin-top: 0.25rem;
+  .grid-item img {
+    height: 220px;
+  }
+  .catering-subwords {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .map-address-card {
+    width: min(85vw, 260px);
+    padding: 1rem;
+  }
 }
 
 @media (max-width: 700px) {

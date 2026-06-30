@@ -1,13 +1,3 @@
-/* ─────────────────────────────────────────────
-   MENU PAGE LOGIC
-   - Pulls items from the Netlify function (which reads your Google Sheet)
-   - Builds the filter row automatically from whatever is in the
-     "category" column, so adding a new category in the sheet is
-     all you need to do — no HTML/JS edits required.
-   - Clicking a filter shows that category's items and strikes
-     through the active filter so the user knows where they are.
-───────────────────────────────────────────── */
-
 let allItems = [];
 let activeCategory = null;
 
