@@ -913,10 +913,4 @@ RESPONSIVENESS
   .menu-item-price {
     font-size: 1.4rem;
   }
-  .filter-wrapper {
-    gap: 1.25rem;
-  }
-  .filter-btn {
-    font-size: 1.3rem;
-  }
 }
