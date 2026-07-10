@@ -1,126 +1,146 @@
 /* ─────────────────────────────────────────────
-     FONT FACES
-  ───────────────────────────────────────────── */
-  
-  @font-face {
-    font-family: 'Work Sans';
-    src: url('/ginos-ASSETS/WorkSans-VariableFont_wght.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Work Sans';
-    src: url('/ginos-ASSETS/WorkSans-Italic-VariableFont_wght.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: italic;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Bungee Tint';
-    src: url('/ginos-ASSETS/BungeeTint-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Oi';
-    src: url('/ginos-ASSETS/Oi-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Climate Crisis';
-    src: url('/ginos-ASSETS/ClimateCrisis-Regular-VariableFont_YEAR.ttf') format('truetype');
-    font-style: normal;
-    font-display: swap;
-  }
-  
-  /* ─────────────────────────────────────────────
-     DESIGN TOKENS
-  ───────────────────────────────────────────── */
-  :root {
-    /* CSS HEX */
-    --blood-red: #920F0Dff;
-    --mahogany-red: #BB1E1Aff;
-    --forest-moss: #4d694e;
-    --dark-emerald: #006745ff;
-    --mint-cream: #E7EEE7ff;
-    --dough: #fff3d5;
-    --cartoon-yellow: rgb(235, 221, 64);
-    --coffee-bean: #0E0306ff;
+   SHARED BASE
+   Loaded on every page, before the page-specific
+   stylesheet (style-index.css / style-menu.css /
+   styles.css / etc). Holds anything that used to
+   be copy-pasted into each file: fonts, design
+   tokens, the reset, the .container utility, and
+   shared keyframes/scroll-reveal behavior.
 
-  
-    --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  /* ─────────────────────────────────────────────
-     RESET
-  ───────────────────────────────────────────── */
-  *, *::before, *::after {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  html { scroll-behavior: smooth; }
-  
-  body {
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 500;
-    overflow-x: hidden;
-    background-color: var(--dough);
-  }
+   To add a new page, link this file first, then
+   a page-specific stylesheet with only that page's
+   unique rules — do not re-paste this block.
+───────────────────────────────────────────── */
 
-  .container{
-    padding: 0 16px;
-    margin: auto;
-  }
+/* ─────────────────────────────────────────────
+   FONT FACES
+───────────────────────────────────────────── */
 
-  /* ========================================
+@font-face {
+  font-family: 'Work Sans';
+  src: url('/ginos-ASSETS/WorkSans-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Work Sans';
+  src: url('/ginos-ASSETS/WorkSans-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bungee Tint';
+  src: url('/ginos-ASSETS/BungeeTint-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Oi';
+  src: url('/ginos-ASSETS/Oi-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Climate Crisis';
+  src: url('/ginos-ASSETS/ClimateCrisis-Regular-VariableFont_YEAR.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────────────── */
+:root {
+  /* CSS HEX */
+  --blood-red: #920F0Dff;
+  --mahogany-red: #BB1E1Aff;
+  --forest-moss: #4d694e;
+  --dark-emerald: #006745ff;
+  --mint-cream: #E7EEE7ff;
+  --dough: #fff3d5;
+  --cartoon-yellow: rgb(235, 221, 64);
+  --coffee-bean: #0E0306ff;
+
+  --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─────────────────────────────────────────────
+   RESET
+───────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 500;
+  overflow-x: hidden;
+  background-color: var(--dough);
+}
+
+/* Single source of truth for .container. Only layout-neutral
+   properties live here (width constraint + spacing) so that no
+   page has to fight it with an ID override. Any section that
+   needs a flex/grid layout should declare that on its own
+   ID/class (see #hero, #catering, .image-grid, #map-section)
+   instead of leaning on .container for it. */
+.container {
+  width: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 3rem 16px;
+}
+
+/* ========================================
    KEYFRAMES
    ======================================== */
-   @keyframes fadeInUp {from { opacity: 0; transform: translate(-50%, -50%) translateY(32px); } to   { opacity: 1; transform: translate(-50%, -50%) translateY(0); }}
-   @keyframes slideUpSlow { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: translateY(0); } }
-   @keyframes stagger     { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-   @keyframes spin        { to   { transform: translate(-50%, -50%) rotate(360deg); } }
-   
-   /* ========================================
-      SCROLL REVEAL
-      ======================================== */
-   .scroll-reveal { opacity: 0; transition: opacity 0.7s ease, transform 0.7s ease; }
-   .scroll-reveal.scroll-reveal-up    { transform: translateY(36px); }
-   .scroll-reveal.scroll-reveal-left  { transform: translateX(-44px); }
-   .scroll-reveal.scroll-reveal-right { transform: translateX(44px); }
-   .scroll-reveal.revealed            { opacity: 1; transform: translate(0, 0); }
+@keyframes fadeInUp {from { opacity: 0; transform: translate(-50%, -50%) translateY(32px); } to   { opacity: 1; transform: translate(-50%, -50%) translateY(0); }}
+@keyframes slideUpSlow { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes stagger     { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes spin        { to   { transform: translate(-50%, -50%) rotate(360deg); } }
 
+/* ========================================
+   SCROLL REVEAL
+   ======================================== */
+.scroll-reveal { opacity: 0; transition: opacity 0.7s ease, transform 0.7s ease; }
+.scroll-reveal.scroll-reveal-up    { transform: translateY(36px); }
+.scroll-reveal.scroll-reveal-left  { transform: translateX(-44px); }
+.scroll-reveal.scroll-reveal-right { transform: translateX(44px); }
+.scroll-reveal.revealed            { opacity: 1; transform: translate(0, 0); }
 
-   /* ========================================
+/* ========================================
       COMING SOON
       ======================================== */
 
-    #coming-soon{
-      display: flex;
-      flex-direction: column;
-      align-content: center;
-      text-align: center;
-      margin-top: 25vh;
-      border: 5px solid var(--coffee-bean);
-      background-color: var(--cartoon-yellow);
-      padding: 2.5rem 2rem;
-      border-radius: 25px;
-      color: var(--coffee-bean);
-      align-items: center;
-      justify-content: center;
-      box-shadow: 8px 8px 0px var(--coffee-bean);
-      width: 75%;
-      gap:.2rem;
-
-    }
-
-    #coming-soon h1{
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    #coming-soon em{
-      font-weight: 600;
-    }
+      #coming-soon{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        text-align: center;
+        margin-top: 25vh;
+        border: 5px solid var(--coffee-bean);
+        background-color: var(--cartoon-yellow);
+        padding: 2.5rem 2rem;
+        border-radius: 25px;
+        color: var(--coffee-bean);
+        align-items: center;
+        justify-content: center;
+        box-shadow: 8px 8px 0px var(--coffee-bean);
+        width: 75%;
+        gap:.2rem;
+  
+      }
+  
+      #coming-soon h1{
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+  
+      #coming-soon em{
+        font-weight: 600;
+      }
