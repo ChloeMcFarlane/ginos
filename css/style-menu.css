@@ -197,11 +197,6 @@ RESPONSIVENESS
 
     /* Responsive alignment footer */
     @media (max-width: 768px) {
-      .contact-points, .social-wrapper {
-        flex-direction: column;
-        text-align: center;
-        justify-content: center;
-      }
       .social-wrapper {
         justify-content: center;
         margin-top: 0.5rem;
